@@ -9,11 +9,23 @@
   <h2 v-bind:class="isSoldout ? 'sold-out' : 'new'">Soldout? movie</h2>
   <h2 v-bind:class="['new', 'promoted']">Newly promoted movie</h2>
   <h2 v-bind:class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">Array Conditional movie</h2>
+
   <h2 v-bind:class="{
     promoted: isPromoted,
     new: !isSoldout,
     'sold-out': isSoldout
   }">Object conditional movie</h2>
+
+  <h2 v-bind:style="{
+    color: highlightColor,
+    'font-size': headerSize + 'px',//or fontSize: headerSize + 'px'
+    padding: '20px'
+  }">Inline Style</h2>
+
+  <h2 v-bind:style="headerStyleObject">Style Object</h2>
+
+  <div v-bind:style="[baseStyleObject, successStyleObject]">Success Style</div>
+  <div v-bind:style="[baseStyleObject, dangerStyleObject]">Success Style</div>
 </template>
 
 <script>
@@ -28,7 +40,30 @@ export default {
       isDisabled: true,
       status: "success",
       isPromoted: true,
-      isSoldout: true
+      isSoldout: true,
+      highlightColor: 'orange',
+      headerSize: 50,
+      headerStyleObject: {
+          color: 'orange',
+          fontSize: '50px',
+          padding: '20px'
+      },
+      baseStyleObject: {
+          fontSize: '50px',
+          padding: '20px'
+      },
+      successStyleObject: {
+          color: 'green',
+          backgroundColor: "lightgreen",
+          border: '1px solid green',
+          padding: '10px' //last property gets more priority when using in an array
+      },
+      dangerStyleObject: {
+          color: 'green',
+          backgroundColor: "red",
+          border: '1px solid green',
+          padding: '10px' //last property gets more priority when using in an array
+      },
       } 
   }
 }
