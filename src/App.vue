@@ -9,6 +9,11 @@
     <h2>Evolution</h2>
     <h2>Vue</h2>
   </template>
+
+  <h2 v-show="showElement">Using v-show</h2>
+  <h2 v-if="showElement">Using v-if</h2>
+
+  <!-- The difference between  v-show and v-if directive is v-show will mount in the DOM and render in the UI even the condition is false. But it toggles the css property display:none to display:block with the specific condition. On the other hand, v-if directive will not mount in the DOM and will not render when the conditionis false. When we need to toggle the display between none to display, v-show is more applicable. Becasue Mount in the DOM again is costly-->
 </template>
 
 <script>
@@ -17,7 +22,8 @@ export default {
   data(){
     return{
       num: 5,
-      display: true
+      display: true,
+      showElement: false
     }
   }
 }
