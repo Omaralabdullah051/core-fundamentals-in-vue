@@ -1,31 +1,31 @@
 <template>
   <div>{{greet}} {{name}}</div> 
   <div v-html="channel"></div> 
-  <h2 v-bind:id="headingId">Heading</h2>
-  <button v-bind:disabled="isDisabled">Bind</button>
+  <h2 :id="headingId">Heading</h2>
+  <button :disabled="isDisable">Bind</button>
   <h2 class="underline">Underline text</h2>
-  <h2 class="underline" v-bind:class="status">Status</h2>
-  <h2 v-bind:class="isPromoted && 'promoted'">Promoted Movie</h2>
-  <h2 v-bind:class="isSoldout ? 'sold-out' : 'new'">Soldout? movie</h2>
-  <h2 v-bind:class="['new', 'promoted']">Newly promoted movie</h2>
-  <h2 v-bind:class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">Array Conditional movie</h2>
+  <h2 class="underline" :class="status">Status</h2>
+  <h2 :class="isPromoted && 'promoted'">Promoted Movie</h2>
+  <h2 :class="isSoldout ? 'sold-out' : 'new'">Soldout? movie</h2>
+  <h2 :class="['new', 'promoted']">Newly promoted movie</h2>
+  <h2 :class="[isPromoted && 'promoted', isSoldout ? 'sold-out' : 'new']">Array Conditional movie</h2>
 
-  <h2 v-bind:class="{
+  <h2 :class="{
     promoted: isPromoted,
     new: !isSoldout,
     'sold-out': isSoldout
   }">Object conditional movie</h2>
 
-  <h2 v-bind:style="{
+  <h2 :style="{
     color: highlightColor,
     'font-size': headerSize + 'px',//or fontSize: headerSize + 'px'
     padding: '20px'
   }">Inline Style</h2>
 
-  <h2 v-bind:style="headerStyleObject">Style Object</h2>
+  <h2 :style="headerStyleObject">Style Object</h2>
 
-  <div v-bind:style="[baseStyleObject, successStyleObject]">Success Style</div>
-  <div v-bind:style="[baseStyleObject, dangerStyleObject]">Success Style</div>
+  <div :style="[baseStyleObject, successStyleObject]">Success Style</div>
+  <div :style="[baseStyleObject, dangerStyleObject]">Success Style</div>
 </template>
 
 <script>
