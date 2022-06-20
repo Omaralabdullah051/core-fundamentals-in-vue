@@ -3,6 +3,8 @@
   <h2>Computed fullname- {{fullName}}</h2>
   <h2>Total - {{items.reduce((total, curr) => (total = total + curr.price),0)}}</h2>
   <h2>Computed Total - {{total}}</h2>
+  <h2>Method Total - {{getTotal()}}</h2>
+  <input type="text" v-model="country">
 </template>
 
 <script>
@@ -28,20 +30,27 @@ export default {
           title: 'Laptop',
           price: 300
         },
-      ]
+      ],
+      country: "BD"
     }
   },
   methods: {
-    
+    getTotal(){
+        console.log('getTotal Method');
+          return this.items.reduce((total, curr) => (total = total + curr.price),0);      
+    }
   },
   computed: {
     fullName(){
       return `${this.firstName} ${this.lastName}`
     },
     total(){
+      console.log('Total computed');
       return this.items.reduce((total, curr) => (total = total + curr.price),0);
     }
   }
+  // Computed properties VS methods
+  // Computed properties are highly performant as they are cached calculations which only update when their dependencies change. On the other hand, methods are always recalculated when the corrosping HTML is rendered.
 }
 </script>
 
