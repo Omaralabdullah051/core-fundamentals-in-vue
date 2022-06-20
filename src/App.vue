@@ -1,20 +1,20 @@
 <template>
   <h2>{{name}}</h2>
   <div>
-    <button v-on:click="name = 'Superman'">Change name</button>
-    <button v-on:mouseover="name = 'Superman'">Change name</button>
+    <!-- By default Vue give us the access of event in methods. But we can pass it also manually -->
+    <button @click="changeName($event), increment(1, $event)">Change name</button>
   </div>
 
   <h2>{{count}}</h2>
   <div>
-    <button v-on:click="count++">Increment</button>
-    <button v-on:click="count--">Decrement</button>
+    <button @click="count++">Increment</button>
+    <button @click="count--">Decrement</button>
   </div>
 
   <h2>{{count2}}</h2>
   <div>
-    <button v-on:click="increment(2)">Increment</button>
-    <button v-on:click="decrement">Decrement</button>
+    <button @click="increment(2, $event)">Increment</button>
+    <button @click="decrement">Decrement</button>
   </div>
 </template>
 
@@ -29,8 +29,13 @@ export default {
     }
   },
   methods: {
-    increment(num){
+    changeName(event){
+      this.name="Superman"
+      console.log(event);
+    },
+    increment(num,event){
       this.count2 += num;
+      console.log(event);
     },
     decrement(){
       this.count2 -= 1;
