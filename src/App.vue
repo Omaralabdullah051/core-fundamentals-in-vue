@@ -1,21 +1,41 @@
 <template>
-  <h2>{{name}}</h2>
-  <div>
-    <!-- By default Vue give us the access of event in methods. But we can pass it also manually -->
-    <button @click="changeName($event), increment(1, $event)">Change name</button>
-  </div>
+<div>
+  <pre>
+    {{JSON.stringify(formValues,null,2)}}
+  </pre>
+</div>
+  <form>
+    <div>
+      <label for="name">Name</label>
+      <input v-model="formValues.name" type="text" name="" id="name" />
+      <p v-if="formValues.name === ''" :style="{color:'red'}">Please provide your name</p>
+      <p v-else-if="formValues.name !== 'batman'" :style="{color:'red'}">Wrong name</p>
+    </div>
 
-  <h2>{{count}}</h2>
-  <div>
-    <button @click="count++">Increment</button>
-    <button @click="count--">Decrement</button>
-  </div>
+    <div>
+      <label for="profile">Profile Summary</label>
+      <textarea v-model="formValues.profileSummary" type="text" name="" id="name" />
+    </div>
 
-  <h2>{{count2}}</h2>
-  <div>
-    <button @click="increment(2, $event)">Increment</button>
-    <button @click="decrement">Decrement</button>
-  </div>
+    <div>
+      <label for="country">Profile Summary</label>
+      <select id="country" v-model="formValues.country">
+        <option value="">Select a country</option>
+        <option value="india">India</option>
+        <option value="singapore">Singapore</option>
+        <option value="bangladesh">Bangladesh</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="job-location">Job Location</label>
+      <select id="job-location" multiple v-model="formValues.jobLocation">
+        <option value="india">India</option>
+        <option value="singapore">Singapore</option>
+        <option value="bangladesh">Bangladesh</option>
+      </select>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -23,23 +43,16 @@ export default {
   name: 'App',
   data(){
     return{
-       name: 'Batman',
-       count: 0,
-       count2: 0
+      formValues: {
+        name: '',
+        profileSummary: '',
+        country: '',
+        jobLocation: []
+      }
     }
   },
   methods: {
-    changeName(event){
-      this.name="Superman"
-      console.log(event);
-    },
-    increment(num,event){
-      this.count2 += num;
-      console.log(event);
-    },
-    decrement(){
-      this.count2 -= 1;
-    }
+  
   }
 }
 </script>
@@ -49,9 +62,33 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
 
+label {
+  font-weight: bold;
+  display: flex;
+  margin-bottom: 5px;
+}
+input + label {
+  font-weight: bold;
+  display: inline-flex;
+  margin-right: 20px;
+}
+input[type='text'],
+textarea,
+select {
+  display: block;
+  width: 400px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 </style>
