@@ -6,6 +6,13 @@
     <button @click="volume+=2">Increase</button>
     <button @click="volume-=2">decrease</button>
   </div>
+  <input type="text" id="" v-model="movie">
+  <input type="text" id="" v-model="movieInfo.title">
+  <input type="text" id="" v-model="movieInfo.actor">
+
+  <div>
+    <button @click="movieList = movieList.concat(['something'])">Add movie</button>
+  </div>
 </template>
 
 <script>
@@ -13,7 +20,13 @@ export default {
   name: 'App',
   data(){
     return{
-      volume: 0
+      volume: 0,
+      movie: 'Batman',
+      movieInfo: {
+        title: '',
+        actor: ''
+      },
+      movieList: ['Batman', 'Superman']
     }
   },
   methods: {
@@ -27,6 +40,24 @@ export default {
       if(newValue > oldValue && newValue === 16){
         alert("Listening to a high volume for a long time may damage your hearing");
       }
+    },
+    movie: {
+      handler(newValue){
+      console.log(`calling api with ${newValue}`)
+      },
+      immediate: true //run watcher handler on page load 
+    },
+    movieInfo: {
+      handler(newValue){
+       console.log(`calling api with movie title ${newValue.title} and actor= ${newValue.actor}`)
+      },
+      deep: true
+    },
+    movieList:{
+      handler(newValue){
+        console.log(`calling movieList with ${newValue}`)
+      },
+      // deep: true
     }
   }
 }
